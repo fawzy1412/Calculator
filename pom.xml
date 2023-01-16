@@ -12,17 +12,38 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-    <plugin>
+    <plugins>
+             <plugin>
+
              <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-jar-plugin</artifactId>
+             <artifactId>maven-assembly-plugin</artifactId>
              <version>3.2.0</version>
+             <executions>
+                 <execution>
+                     <phase>package</phase>
+                     <goals>
+                         <goal>single</goal>
+                     </goals>
+                 </execution>
+             </executions>
+
              <configuration>
+                 <descriptorRefs>
+                     <descriptorRef>jar-with-dependencies</descriptorRef>
+                 </descriptorRefs>
+
                  <archive>
-                     <manifestFile> Your path like: src/main/resources/META-INF/MANIFEST.MF </manifestFile>
+
                      <index>true</index>
-                         <manifest>
-                             <addClasspath>true</addClasspath>
-                         </manifest>
+
+                     <manifest>
+                         <addClasspath>true</addClasspath>
+                         <mainClass> yourpacket.yourmainclass (for exmaple info.data.MainClass)</mainClass>
+                     </manifest>
+                     <manifestEntries>
+                         <mode>development</mode>
+                         <url>${project.url}</url>
+                     </manifestEntries>
                  </archive>
              </configuration>
     </plugin>
